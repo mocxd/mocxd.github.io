@@ -1,17 +1,24 @@
 ---
 ---
 @charset "utf-8";
-@import url(https://fonts.googleapis.com/css?family=Poppins:400,300,600|Work+Sans:400,300,600,700);
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,700|Oxygen:300,700);
 
 $gray-0: rgba(0, 0, 0, 0.05);
+$gray-1: rgba(0, 0, 0, 0.1);
+$gray-5: rgba(0, 0, 0, 0.5);
+$gray-solid-5: rgba(127, 127, 127, 1);
+$gray-solid-2: rgba(210, 210, 210, 1);
 
 $h-font: 'Work Sans', sans-serif;
-$base-font: 'Poppins', sans-serif;
+$base-font: 'Oxygen', sans-serif;
 $base-font-size: 17px;
 $base-font-weight: 400;
 $base-line-height: 1.8;
 $base-fg: rgb(22, 22, 22);
 $base-bg: rgb(255, 255, 255);
+
+$menu-height: 60px;
+$menu-icon-size: 23px;
 
 * { box-sizing: border-box; }
 
@@ -25,17 +32,66 @@ body {
     margin: 0;
 }
 
+h1, h2, h3, h4, h5 {
+    font-family: $h-font;
+}
+
 .site-nav {
     position: relative;
-    top: 0;
     display: block;
     width: 100vw;
-    height: 40px;
+    height: $menu-height;
     background-color: $gray-0;
     .menu-icon {
+        position: static;
+        display: inline-block;
+        margin-left:   ($menu-height - $menu-icon-size) / 2;
+        margin-top:     ($menu-height - $menu-icon-size) / 2;
+        margin-bottom:  ($menu-height - $menu-icon-size) / 2;
+        path {
+            fill: $gray-solid-5;
+        }
+        &.clicked {
+            path {
+                fill: $gray-solid-2;
+            }
+            & ~ .trigger {
+                transform: translateX(0);
+                transition: transform .2s;
+            }
+        }
         & > svg {
-            width: 20px;
-            height: 20px;
+            width: $menu-icon-size;
+            height: $menu-icon-size;
         }
     }
+}
+
+.trigger {
+    background-color: $gray-0;
+    width: 200px;
+    height: 100vh; // fallback
+    position: absolute;
+    top: $menu-height;
+    margin: 0;
+    transform: translateX(-200px);
+    transition: transform .2s;
+    a {
+        text-align: center;
+        display: block;
+        padding: 20px;
+    }
+}
+
+.page-heading {
+    width: 400px;
+    word-spacing: 100px;
+    margin: 80px auto;
+    font-size: 22px;
+    font-weight: 100;
+    color: $gray-5;
+}
+
+.moniker {
+    font-weight: 700 !important; // yes
 }
